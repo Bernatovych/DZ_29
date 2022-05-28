@@ -1,0 +1,29 @@
+<div class="text-right">
+    <a href="{{ url_for('index', page=records.prev_num) }}"
+       class="btn btn-outline-dark
+       {% if records.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    {% for page_num in records.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+            {% if records.page == page_num %}
+            <a href="{{ url_for('index', page=page_num) }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('index', page=page_num) }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('index', page=records.next_num) }}"
+       class="btn btn-outline-dark
+       {% if records.page == records.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
